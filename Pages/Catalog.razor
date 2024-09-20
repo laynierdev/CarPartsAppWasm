@@ -1,0 +1,31 @@
+﻿
+@page "/parts"
+
+<PageTitle>Auto Parts</PageTitle>
+
+<h1>Auto Parts</h1>
+
+<div style="display: flex !important;" class="flex-wrap">
+    @while (cant < 10)
+    {
+        <div class="card m-4 p-4">
+            <div class="card-header">
+                Image of product
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li >Name: ProductName</li>
+                    <li >Description: Product Description lorem ipsum</li>
+                </ul>
+            </div>
+            <div class="card-footer">
+                $00.00
+            </div>
+        </div>
+        cant += 1;
+    }
+</div>
+
+@code {
+    int cant = 0; // for the bucle
+}
