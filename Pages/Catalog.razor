@@ -1,31 +1,33 @@
-﻿
-@page "/parts"
+﻿@page "/parts"
+@using CarPartsAppWasm.Models
+@using CarPartsAppWasm.Services
+@inject CartService CartService
 
-<PageTitle>Auto Parts</PageTitle>
+<h3>Auto Parts</h3>
 
-<h1>Auto Parts</h1>
-
-<div style="display: flex !important;" class="flex-wrap">
-    @while (cant < 10)
+<div class="catalog">
+    @foreach (var product in Products)
     {
-        <div class="card m-4 p-4">
-            <div class="card-header">
-                Image of product
-            </div>
-            <div class="card-body">
-                <ul>
-                    <li >Name: ProductName</li>
-                    <li >Description: Product Description lorem ipsum</li>
-                </ul>
-            </div>
-            <div class="card-footer">
-                $00.00
-            </div>
-        </div>
-        cant += 1;
+        <Product ProductItem="product" />
     }
 </div>
 
 @code {
-    int cant = 0; // for the bucle
+    @*Example list, as server will obtain from API the products in database*@
+    private List<ProductDto> Products = new List<ProductDto>
+    {
+        new ProductDto { name = "Air Filter", description = "High-quality air filter", price = 15.99m, quantity = 1 },
+        new ProductDto { name = "Spark Plug", description = "Ignition spark plug", price = 5.99m, quantity = 1 },
+        new ProductDto { name = "Oil Filter", description = "Durable oil filter for extended engine life", price = 7.49m, quantity = 1 },
+        new ProductDto { name = "Brake Pads", description = "High-performance brake pads for safe stopping", price = 29.99m, quantity = 1 },
+        new ProductDto { name = "Headlight Bulb", description = "Bright and long-lasting headlight bulb", price = 12.99m, quantity = 1 },
+        new ProductDto { name = "Windshield Wipers", description = "All-weather windshield wipers for clear vision", price = 9.99m, quantity = 1 },
+        new ProductDto { name = "Battery", description = "Reliable car battery with long lifespan", price = 89.99m, quantity = 1 },
+        new ProductDto { name = "Radiator", description = "Efficient radiator for optimal engine cooling", price = 120.00m, quantity = 1 },
+        new ProductDto { name = "Tire", description = "All-season tire for smooth and safe driving", price = 75.00m, quantity = 1 },
+        new ProductDto { name = "Fuel Pump", description = "High-efficiency fuel pump for better performance", price = 45.99m, quantity = 1 }
+    };
+
+
 }
+

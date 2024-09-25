@@ -99,5 +99,46 @@ a, .btn-link {
     }
 
 code {
-    color: #c02d76;
+    color: #242223;
+}
+
+.welcome-poster {
+    background-image: none;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    max-width: 100%;
+    min-height: 100%;
+}
+
+.welcome-text {
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    font-family: "Calibri Light", system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; 
+    font-weight: 100; 
+    font-size: 29rem;
+    text-align: center;
+    padding: 10px;
+    background-color: transparent;
+}
+
+.welcome-text-secondary {
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 60%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  
+    padding: 10px;
+
 }

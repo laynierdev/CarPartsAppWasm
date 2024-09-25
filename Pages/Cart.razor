@@ -1,0 +1,28 @@
+﻿@page "/cart"
+@using CarPartsAppWasm.Services
+@inject CartService CartService
+
+<h3>Shopping Cart</h3>
+
+@if (CartService.GetItems().Any())
+{
+    <ul>
+        @foreach (var item in CartService.GetItems())
+        {
+            <li>@item.name - @item.quantity x @item.price.ToString("C")</li>
+        }
+    </ul>
+    <p>Total: @CartService.GetTotal().ToString("C")</p>
+    <button @onclick="ClearCart">Empty Cart</button>
+}
+else
+{
+    <p>Cart is empty. Buy something!</p>
+}
+
+@code {
+    private void ClearCart()
+    {
+        CartService.ClearCart();
+    }
+}

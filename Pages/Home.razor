@@ -1,7 +1,20 @@
 ﻿@page "/"
+@inject NavigationManager NavigationManager
 
 <PageTitle>Home</PageTitle>
+<div class="welcome-text">
+    <h1>Car Parts for every model</h1>
+</div>
 
-<h1>Car Parts for every model you want!</h1>
+<div class="welcome-text-secondary">
+    <button class="btn btn-outline-dark" @onclick="NavigateToParts">Let's see this parts!</button>
+</div>
 
-Please take a look of our best offers
+
+
+@code {
+    private void NavigateToParts()
+    {
+        NavigationManager.NavigateTo("/parts");
+    }
+}

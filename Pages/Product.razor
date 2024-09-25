@@ -1,0 +1,27 @@
+﻿@using CarPartsAppWasm.Models
+@using CarPartsAppWasm.Services
+@inject CartService CartService
+
+<div class="product">
+    <h4>@ProductItem.name</h4>
+    <p>@ProductItem.description</p>
+    <p>Price: @ProductItem.price.ToString("C")</p>
+    <button @onclick="AddToCart">Add to Cart</button>
+</div>
+
+@code {
+    [Parameter]
+    public ProductDto ProductItem { get; set; }
+
+    private void AddToCart()
+    {
+        var item = new ProductDto
+        {
+            name = ProductItem.name,
+            description = ProductItem.description,
+            price = ProductItem.price,
+            quantity = 1
+        };
+        CartService.AddItem(item);
+    }
+}

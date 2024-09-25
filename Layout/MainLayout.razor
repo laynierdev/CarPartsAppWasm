@@ -1,5 +1,7 @@
-﻿@using CarPartsAppWasm.Shared
+﻿@using CarPartsAppWasm.Services
+@using CarPartsAppWasm.Shared
 @inherits LayoutComponentBase
+@inject CartService CartService
 <div class="page">
     <div class="sidebar">
         <NavMenu/>
@@ -8,11 +10,17 @@
     <main>
         
         <div class="top-row px-4">
+            @*shoping cart component*@
+            <NavLink class="nav-link" href="/cart">
+                Cart (@CartService.GetItems().Count())
+            </NavLink>
+   
+            @*end shopping cart component*@
             <AccessControl/>
             <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
         </div>
 
-        <article class="content px-4">
+        <article class="content px-4 welcome-poster">
             @Body
         </article>
     </main>
