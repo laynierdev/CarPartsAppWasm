@@ -1,0 +1,21 @@
+﻿.home-welcome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    text-align: center;
+}
+
+@media (max-width: 640.98px) {
+    .home-welcome {
+        justify-content: center;
+        align-items: center;
+        height: 70vh; 
+    }
+
+    .home-welcome .welcome-text,
+    .home-welcome .welcome-text-secondary {
+        margin: 10px 0; 
+    }
+}

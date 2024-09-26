@@ -12,7 +12,7 @@
         <div class="top-row px-4">
             @*shoping cart component*@
             <NavLink class="nav-link" href="/cart">
-                Cart (@CartService.GetItems().Count())
+                <BiCartCheckFill Size="25" /> Cart (@CartService.GetItems().Sum(item=>item.Quantity))
             </NavLink>
    
             @*end shopping cart component*@
@@ -25,3 +25,15 @@
         </article>
     </main>
 </div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        CartService.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        CartService.OnChange -= StateHasChanged;
+    }
+}

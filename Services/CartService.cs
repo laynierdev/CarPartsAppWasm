@@ -4,33 +4,39 @@ namespace CarPartsAppWasm.Services;
 
 public class CartService
 {
-    private List<ProductDto> items = new List<ProductDto>();
+    private List<ProductDto> _items = new();
+    public event Action? OnChange;
 
-    public IEnumerable<ProductDto> GetItems() => items;
+
+    public IEnumerable<ProductDto> GetItems() => _items;
 
     public void AddItem(ProductDto item)
     {
-        var existingItem = items.FirstOrDefault(i => i.name == item.name);
+        var existingItem = _items.FirstOrDefault(i => i.Name == item.Name);
         if (existingItem != null)
         {
-            existingItem.quantity += item.quantity;
+            existingItem.Quantity += item.Quantity;
         }
         else
         {
-            items.Add(item);
+            _items.Add(item);
         }
+        NotifyStateChanged();
     }
+
+    private void NotifyStateChanged() => OnChange?.Invoke();
 
     public void RemoveItem(string productName)
     {
-        var item = items.FirstOrDefault(i => i.name == productName);
+        var item = _items.FirstOrDefault(i => i.Name == productName);
         if (item != null)
         {
-            items.Remove(item);
+            _items.Remove(item);
         }
+        NotifyStateChanged();
     }
 
-    public void ClearCart() => items.Clear();
+    public void ClearCart() => _items.Clear();
 
-    public decimal GetTotal() => items.Sum(i => i.price * i.quantity);
+    public decimal GetTotal() => _items.Sum(i => i.Price * i.Quantity);
 }

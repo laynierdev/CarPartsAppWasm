@@ -1,28 +1,62 @@
 ﻿@page "/cart"
 @using CarPartsAppWasm.Services
 @inject CartService CartService
+@inject NavigationManager NavigationManager
 
-<h3>Shopping Cart</h3>
+<div class="card">
 
-@if (CartService.GetItems().Any())
-{
-    <ul>
-        @foreach (var item in CartService.GetItems())
+    <div class="card-header">
+        <div class="card-title">
+            <a class="clear" @onclick="ClearCart">Empty Cart</a>
+            <h3 class="cart-title">Shopping Cart</h3>
+        </div>
+    </div> 
+    <div class="card-body">
+        @if (CartService.GetItems().Any())
         {
-            <li>@item.name - @item.quantity x @item.price.ToString("C")</li>
-        }
-    </ul>
-    <p>Total: @CartService.GetTotal().ToString("C")</p>
-    <button @onclick="ClearCart">Empty Cart</button>
-}
-else
-{
-    <p>Cart is empty. Buy something!</p>
-}
+        <ul class="cart-items">
+            @foreach (var item in CartService.GetItems())
+            {
+            <li class="cart-item">
+                <b>Product: @item.Name</b> x <b>@item.Quantity</b> <b>@item.Price.ToString("C")</b>
+            </li>
+            }
+        </ul>  
+        <p class="cart-total">
+            Total: @CartService.GetTotal().ToString("C")
+        </p>
+        <div class="card-footer">
+            <div class="finish-buttons">
+                <button class="btn-buy-more" @onclick="BuyMore">Buy more!</button>
+                <button class="btn-pay" @onclick="Checkout">Checkout</button>  
+            </div>
 
+        </div>
+        }   
+        else
+        {
+        <p class="empty-cart-message" @onclick="BuyMore">Cart is empty. Buy something!</p>
+        }
+    </div>
+
+    
+ 
+
+</div>
 @code {
     private void ClearCart()
     {
         CartService.ClearCart();
     }
+
+    private void BuyMore()
+    {
+        NavigationManager.NavigateTo("/parts");
+    }
+
+    private void Checkout()
+    {
+        throw new NotImplementedException();
+    }
+
 }

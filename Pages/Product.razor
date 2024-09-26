@@ -2,25 +2,27 @@
 @using CarPartsAppWasm.Services
 @inject CartService CartService
 
-<div class="product">
-    <h4>@ProductItem.name</h4>
-    <p>@ProductItem.description</p>
-    <p>Price: @ProductItem.price.ToString("C")</p>
+<div class="product-card">
+    <img src=@ProductItem!.ImageUrl alt="@ProductItem!.Name" class="product-image" />
+    <h4>@ProductItem.Name</h4>
+    <p>@ProductItem.Description</p>
+    <p class="Price">Price: @ProductItem.Price.ToString("C", System.Globalization.CultureInfo.CurrentCulture)</p>
     <button @onclick="AddToCart">Add to Cart</button>
 </div>
 
 @code {
     [Parameter]
-    public ProductDto ProductItem { get; set; }
+    public ProductDto? ProductItem { get; set; }
 
     private void AddToCart()
     {
+        if (ProductItem == null) return;
         var item = new ProductDto
         {
-            name = ProductItem.name,
-            description = ProductItem.description,
-            price = ProductItem.price,
-            quantity = 1
+            Name = ProductItem.Name,
+            Description = ProductItem.Description,
+            Price = ProductItem.Price,
+            Quantity = 1
         };
         CartService.AddItem(item);
     }

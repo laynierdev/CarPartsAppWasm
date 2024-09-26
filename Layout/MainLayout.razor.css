@@ -8,9 +8,21 @@ main {
     flex: 1;
 }
 
-.sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+
+.sidebar a {
+    display: block;
+    color: #1e1d1d;
+    padding: 10px;
+    text-decoration: none;
 }
+
+.sidebar a:hover {
+    background-color: #100f0f;
+    color: #c5bebe;
+}
+
+
+
 
 .top-row {
     background-color: #f7f7f7;
@@ -21,29 +33,33 @@ main {
     align-items: center;
 }
 
-    .top-row ::deep a, .top-row ::deep .btn-link {
-        white-space: nowrap;
-        margin-left: 1.5rem;
-        text-decoration: none;
-    }
+.top-row ::deep a, .top-row ::deep .btn-link {
+    white-space: nowrap;
+    margin-left: 1.5rem;
+    text-decoration: none;
+}
 
-    .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
-        text-decoration: underline;
-    }
+.top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
+    text-decoration: underline;
+}
 
-    .top-row ::deep a:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+.top-row ::deep a:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 @media (max-width: 640.98px) {
     .top-row {
-        justify-content: space-between;
+        justify-content: flex-end;
     }
 
     .top-row ::deep a, .top-row ::deep .btn-link {
-        margin-left: 0;
+        margin-left: 10px;
     }
+    .sidebar {
+        background-color: #2b2d30;
+    }
+    
 }
 
 @media (min-width: 641px) {
@@ -73,5 +89,16 @@ main {
     .top-row, article {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
+    }
+
+    .sidebar {
+        background-color: #2b2d30;
+        padding: 20px;
+        width: 250px;
+        height: 100vh;
+        position: relative;
+        top: 0;
+        left: 0;
+        z-index: 99;
     }
 }

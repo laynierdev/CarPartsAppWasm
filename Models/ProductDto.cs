@@ -2,8 +2,9 @@
 
 public class ProductDto
 {
- public string name { get; set; } = string.Empty;
- public string description { get; set; } = string.Empty;
- public decimal price { get; set; }
- public int quantity { get; set; }
+ public string? Name { get; set; } = string.Empty;
+ public string Description { get; set; } = string.Empty;
+ public decimal Price { get; set; }
+ public int Quantity { get; set; }
+ public string? ImageUrl { get; set; }
  }

@@ -81,3 +81,18 @@
         overflow-y: auto;
     }
 }
+@media (max-width: 640.98px) {
+    .collapse {
+        display: none; /* Collapse the sidebar for small screens */
+    }
+}
+
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}

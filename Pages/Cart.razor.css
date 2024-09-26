@@ -1,1 +1,104 @@
-﻿
+﻿.cart-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between; /* Alinea los elementos a los extremos */
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    align-items: center; /* Asegura que los elementos se alineen verticalmente */
+}
+
+.cart-item b {
+    flex: 1; /* Permite que el nombre del producto ocupe el espacio disponible */
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.cart-item .item-price {
+    text-align: right; /* Alinea el precio a la derecha */
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.item-name {
+    font-weight: bold;
+}
+
+.item-quantity {
+    color: #555;
+}
+
+.cart-total {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.clear {
+    display: flex;
+    justify-content: flex-end;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.clear:hover {
+    color: #ff1a1a;
+}
+.btn-pay {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 0;
+    margin-left: 15px;
+}
+
+.btn-pay:hover {
+    background-color: darkgreen;
+}
+.btn-buy-more {
+    background-color: darkgoldenrod;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 0;
+}
+
+.btn-buy-more:hover {
+    background-color: #503a05;
+}
+
+.empty-cart-message {
+    font-size: 18px;
+    color: #888;
+    cursor: pointer;
+}
+.empty-cart-message:hover {
+    font-size: 19px;
+    color: #595959;
+}
+
+.finish-buttons {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+div.card-body > ul{
+    padding-left: 0;
+}

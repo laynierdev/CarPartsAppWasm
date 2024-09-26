@@ -2,13 +2,16 @@
 @inject NavigationManager NavigationManager
 
 <PageTitle>Home</PageTitle>
-<div class="welcome-text">
-    <h1>Car Parts for every model</h1>
+<div class="home-welcome">
+    <div class="welcome-text">
+        <h1>Car Parts for every model</h1>
+    </div>
+
+    <div class="welcome-text-secondary">
+        <button class="btn btn-outline-dark" @onclick="NavigateToParts">Let's see this parts!</button>
+    </div>
 </div>
 
-<div class="welcome-text-secondary">
-    <button class="btn btn-outline-dark" @onclick="NavigateToParts">Let's see this parts!</button>
-</div>
 
 
 
