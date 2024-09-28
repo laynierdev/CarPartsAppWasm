@@ -1,9 +1,13 @@
 ﻿@page "/parts"
 @using CarPartsAppWasm.Models
 @using CarPartsAppWasm.Services
+@inject NavigationManager NavigationManager
 @inject CartService CartService
 
 <h3>Auto Parts</h3>
+<div id="CreateProductsDiv">
+    <button class="btn btn-primary" @onclick="CreateProduct">+</button>
+</div>
 
 <div class="catalog">
     @foreach (var product in Products)
@@ -28,5 +32,10 @@
         new ProductDto { Name = "Fuel Pump", Description = "High-efficiency fuel pump for better performance", Price = 45.99m, Quantity = 1, ImageUrl = "../img/products/generic.jpg"  }
     };
 
+    private void CreateProduct()
+    {
+        NavigationManager.NavigateTo("/create-product");
+        
+    }
 
 }
