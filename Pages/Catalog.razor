@@ -2,7 +2,7 @@
 @using CarPartsAppWasm.Models
 @using CarPartsAppWasm.Services
 @inject NavigationManager NavigationManager
-@inject CartService CartService
+@inject ProductService ProductService
 
 <h3>Auto Parts</h3>
 <div id="CreateProductsDiv">
@@ -10,32 +10,45 @@
 </div>
 
 <div class="catalog">
-    @foreach (var product in Products)
+    @if (_products == null)
     {
-        <Product ProductItem="product" />
+        <p>Cargando productos...</p>
+    }
+    else if (!_products.Any())
+    {
+        <p>No hay productos disponibles.</p>
+    }
+    else
+    {
+        var ServerBaseUrl = ProductService.GetServerUrl();
+        @foreach (var product in _products)
+        {
+            var imageUrl = string.IsNullOrEmpty(product.ImageUrl) 
+                ? "../img/products/generic.jpg" 
+                : $"{ServerBaseUrl}{product.ImageUrl}";
+            
+            <Product ProductItem="new ProductDto { Name = product.Name, Description = product.Description,
+             Price = product.Price, Quantity = product.Quantity, ImageUrl = imageUrl }" />
+        
+        }
     }
 </div>
 
 @code {
-    @*Example list, as server will obtain from API the products in database*@
-    private List<ProductDto> Products = new List<ProductDto>
+    private List<ProductDto> _products;
+
+    protected override async Task OnInitializedAsync()
     {
-        new ProductDto { Name = "Air Filter", Description = "High-quality air filter", Price = 15.99m, Quantity = 1, ImageUrl ="/img/products/generic.jpg" },
-        new ProductDto { Name = "Spark Plug", Description = "Ignition spark plug", Price = 5.99m, Quantity = 1, ImageUrl = "../img/products/generic.jpg"  },
-        new ProductDto { Name = "Oil Filter", Description = "Durable oil filter for extended engine life", Price = 7.49m, Quantity = 1, ImageUrl = "../img/products/generic.jpg"  },
-        new ProductDto { Name = "Brake Pads", Description = "High-performance brake pads for safe stopping", Price = 29.99m, Quantity = 1, ImageUrl = "../img/products/generic.jpg"  },
-        new ProductDto { Name = "Headlight Bulb", Description = "Bright and long-lasting headlight bulb", Price = 12.99m, Quantity = 1, ImageUrl = "../img/products/generic.jpg"  },
-        new ProductDto { Name = "Windshield Wipers", Description = "All-weather windshield wipers for clear vision", Price = 9.99m, Quantity = 1, ImageUrl = "../img/products/generic.jpg"  },
-        new ProductDto { Name = "Battery", Description = "Reliable car battery with long lifespan", Price = 89.99m, Quantity = 1, ImageUrl = "../img/products/generic.jpg"  },
-        new ProductDto { Name = "Radiator", Description = "Efficient radiator for optimal engine cooling", Price = 120.00m, Quantity = 1, ImageUrl = "../img/products/generic.jpg"  },
-        new ProductDto { Name = "Tire", Description = "All-season tire for smooth and safe driving", Price = 75.00m, Quantity = 1, ImageUrl = "../img/products/generic.jpg"  },
-        new ProductDto { Name = "Fuel Pump", Description = "High-efficiency fuel pump for better performance", Price = 45.99m, Quantity = 1, ImageUrl = "../img/products/generic.jpg"  }
-    };
+        await LoadProducts();
+    }
+
+    private async Task LoadProducts()
+    {
+        _products = await ProductService.GetProductsAsync();
+    }
 
     private void CreateProduct()
     {
         NavigationManager.NavigateTo("/create-product");
-        
     }
-
 }

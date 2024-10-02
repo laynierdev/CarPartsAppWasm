@@ -1,14 +1,21 @@
 ﻿@page "/create-product"
 @using System.Globalization
 @using System.Net.Http.Headers
+@using Blazored.Toast.Services
 @using Microsoft.AspNetCore.Components.Forms
 @using CarPartsAppWasm.Models
 @using CarPartsAppWasm.Shared
+@using Blazored.Toast
 @inject HttpClient Http
 @inject ServerSettings ServerSettings
+@inject NavigationManager NavigationManager
+@inject Blazored.Toast.Services.IToastService ToastService
+@inject IToastService toastService
+
 
 <h3 class="mb-4">Create Product</h3>
 
+<BlazoredToast  />
 <EditForm Model="_product" OnValidSubmit="HandleValidSubmit" class="container">
     <DataAnnotationsValidator />
     <ValidationSummary class="alert alert-danger" />
@@ -75,8 +82,10 @@
             if (response.IsSuccessStatusCode)
             {
                 var createdProduct = await response.Content.ReadFromJsonAsync<Product>(); 
-                Console.WriteLine("Product Created!");            
-                // TODO handle notification and/or redirect to page(first validate product was created)
+                //ToastService.ShowSuccess("Product created!");
+                toastService.ShowSuccess("Product created!");
+                await Task.Delay(2000);
+                NavigationManager.NavigateTo("/parts");         
             }
             else
             {

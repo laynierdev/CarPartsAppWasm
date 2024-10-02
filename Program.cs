@@ -1,4 +1,5 @@
 using System.Globalization;
+using Blazored.Toast;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using CarPartsAppWasm;
@@ -25,5 +26,8 @@ builder.Services.AddOidcAuthentication(options =>
     options.ProviderOptions.ResponseType = "code";
 });
 builder.Services.AddSingleton<CartService>();
+builder.Services.AddScoped<ProductService>(sp => 
+    new ProductService(sp.GetRequiredService<HttpClient>(), sp.GetRequiredService<ServerSettings>()));
+builder.Services.AddBlazoredToast();
 
 await builder.Build().RunAsync();
